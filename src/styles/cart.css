@@ -1,0 +1,155 @@
+.cart-radio-btns,
+.cart-color-radio-btns {
+	opacity: 0;
+	width: 0;
+}
+
+.cart-radio-btns:checked + label {
+	background-color: #000;
+	color: #fff;
+}
+
+.cart-labels,
+.cart-color-labels {
+	display: inline-block;
+	font-family: 'Source Sans Pro', sans-serif;
+	background-color: #fff;
+	padding: 0.9vw 1.6vw;
+	border: 1px solid #1d1f22;
+	position: relative;
+	cursor: pointer;
+	transition: 0.2s ease-out;
+}
+
+.cart-color-labels {
+	width: 1.5vw;
+	height: 1vw;
+	opacity: 0.6;
+}
+
+.cart-radio-btns:hover + label {
+	transform: scale(1.01);
+}
+
+.cart-color-radio-btns:checked + label {
+	transform: scale(1.2);
+	opacity: 1;
+}
+
+.cart-attr-wrapper {
+	min-width: 20vw;
+	display: flex;
+	gap: 12px;
+	margin-top: 10px;
+	position: inline-block;
+}
+
+.attr-container {
+	display: flex;
+	padding: 10px;
+	flex-direction: column;
+}
+
+.change-quantity {
+	cursor: pointer;
+	border: 1px solid #1d1f22;
+	width: 45px;
+	height: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	align-self: flex-end;
+}
+
+.cart-attribute-name {
+	font-weight: 600;
+	text-align: left;
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	justify-content: center;
+}
+
+.cart-wrapper {
+	margin: 3vh auto 5vh 9vw;
+}
+
+.cart-wrapper > p {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 700;
+	font-size: 32px;
+	color: #1d1f22;
+	margin-bottom: 8vh;
+	margin-top: 10vh;
+}
+
+.cart-prod-wrapper {
+	border-top: 1px solid #e5e5e5;
+	margin-right: 17vw;
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+}
+
+.prod-quan-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.quantity-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-right: 12px;
+}
+
+.change-img-btn {
+	position: absolute;
+	background-color: transparent;
+	border: none;
+	top: 50%;
+	cursor: pointer;
+	height: 18px;
+	width: 12px;
+}
+
+.change-img-btn:hover {
+	color: black;
+}
+
+.change-img-btn.right {
+	right: 5%;
+}
+
+.change-img-btn.left {
+	left: 5%;
+}
+
+.cart-item-name,
+.cart-item-brand,
+.cart-item-price {
+	font-family: 'Raleway', sans-serif;
+	color: #1d1f22;
+}
+
+.cart-item-brand {
+	font-size: 30px;
+	font-weight: 600;
+	margin-bottom: 16px;
+}
+
+.cart-item-name {
+	font-size: 27px;
+	font-weight: 400;
+	margin-bottom: 13px;
+}
+
+.cart-item-price {
+	font-weight: 700;
+	font-size: 24px;
+	margin-bottom: 13px;
+}

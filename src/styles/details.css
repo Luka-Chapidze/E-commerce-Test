@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?Source+Sans+Pro&family=Roboto&Raleway:wght@200;400;500;600;700&family=Roboto+Condensed:wght@700&display=swap');
+
+:root {
+	--display-for-before: none;
+}
+
+.pdp-images {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.pdp-images img {
+	cursor: pointer;
+}
+
+.details-wrapper {
+	display: flex;
+}
+
+.active-img {
+	padding-left: 5vw;
+	width: 35vw;
+}
+.details-imgs {
+	height: 5.5vw;
+	width: 5.5vw;
+}
+
+.images-wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-shrink: 0;
+	padding-top: 4vw;
+	margin-left: 7vw;
+	margin-right: 15vw;
+}
+
+.details-texts h2 {
+	padding-top: 5.5vw;
+	font-weight: 600;
+	font-size: 2em;
+	padding-bottom: 16px;
+}
+
+.details-texts h3 {
+	font-size: 2em;
+	font-weight: 400;
+	max-width: 300px;
+	word-wrap: break-word;
+}
+
+@media all and (max-width: 600px) {
+	.details-texts > h2,
+	.details-texts > h3 {
+		font-size: 1.2em;
+	}
+	#header-wrapper > nav {
+		left: 0;
+		right: 0;
+		max-width: 95vw;
+	}
+	body {
+		overflow-x: hidden;
+	}
+}
+.details-texts {
+	font-family: 'Raleway', sans-serif;
+	color: #1d1f22;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 3vw;
+}
+
+.details-texts p {
+	font-weight: bold;
+	font-size: 18px;
+	padding-top: 45px;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+.radio-btns,
+.color-radio-btns {
+	opacity: 0;
+	width: 0;
+}
+
+.radio-btns:checked + label {
+	background-color: #000;
+	color: #fff;
+}
+
+.labels,
+.color-labels {
+	display: inline-block;
+	font-family: 'Source Sans Pro', sans-serif;
+	background-color: #fff;
+	padding: 0.9vw 1.6vw;
+	border: 1px solid #1d1f22;
+	position: relative;
+	cursor: pointer;
+	transition: 0.2s ease-out;
+}
+
+.color-labels {
+	width: 1.5vw;
+	height: 1vw;
+	opacity: 0.6;
+}
+
+.radio-btns:hover + label {
+	transform: scale(1.01);
+}
+
+.color-radio-btns:checked + label {
+	transform: scale(1.2);
+	opacity: 1;
+}
+
+.form {
+	display: flex;
+}
+
+.attributes-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 3em;
+	position: relative;
+}
+
+.info-wrapper {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	padding-left: 7vw;
+}
+.form {
+	display: flex;
+	flex-direction: column;
+}
+
+.form > p,
+.pdp-price-text {
+	font-family: 'Roboto Condensed';
+	font-weight: bold;
+}
+
+.pdp-price-text {
+	margin-top: 2.7vw;
+}
+.radios-wrapper {
+	padding-top: 8px;
+	display: flex;
+	gap: 12px;
+}
+
+.pdp-price {
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-top: 10px;
+}
+
+.pdp-add-btn {
+	padding: 1.1vw 8.2vw;
+	margin-top: 2vw;
+	cursor: pointer;
+	background-color: #5ece7b;
+	border: none;
+	color: #fff;
+	font-family: 'Raleway', sans-serif;
+	transition: 0.3s ease-out;
+	position: relative;
+}
+
+.pdp-add-btn::before {
+	content: 'Please Select All Attributes';
+	font-family: 'Raleway', sans-serif;
+	color: rgb(255, 89, 89);
+	display: var(--display-for-before);
+	position: absolute;
+	bottom: -20px;
+	font-size: 12px;
+	transition: 1s ease-out;
+	width: max-content;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.pdp-add-btn:hover {
+	background-color: #87d49c;
+	transform: scale(0.98);
+}
+
+.description {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	color: #1d1f22;
+	max-width: 20vw;
+	word-wrap: break-word;
+	font-size: 16px;
+	margin-top: 3vw;
+	margin-bottom: 30px;
+}
+
+.description h1 {
+	font-size: 18px;
+	margin-bottom: 10px;
+	color: #1d1f22;
+	font-family: 'Roboto', sans-serif;
+}
+.logo {
+	margin-right: 8vw;
+	position: absolute;
+	right: 50%;
+	left: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.description p {
+	color: #1d1f22;
+	font-family: 'Roboto', sans-serif;
+	margin-bottom: 30px;
+}
+
+.category-wrapper {
+	display: flex;
+	align-items: center;
+}
+
+.images-cont,
+.active-img-wrapper {
+	display: flex;
+}
+
+@media all and (max-width: 600px) {
+	.description {
+		max-width: 80vw;
+		margin-top: 50px;
+	}
+	.description h1 {
+		font-size: 14px;
+	}
+	.description p {
+		font-size: 13px;
+	}
+	.images-wrapper {
+		flex-direction: column;
+	}
+	.details-wrapper {
+		justify-content: center;
+		align-items: center;
+		width: 100vw;
+	}
+	.cart-prod-wrapper {
+		flex-direction: column;
+		align-items: center;
+	}
+	.prod-quan-wrapper {
+		margin-top: 30px;
+	}
+	.logo {
+		display: none;
+	}
+	.images-cont {
+		margin-top: 50px;
+	}
+	.active-img {
+		justify-self: center;
+		align-self: center;
+	}
+	.details-texts {
+		margin-top: 30px;
+	}
+	.info-wrapper {
+		justify-content: center;
+	}
+}

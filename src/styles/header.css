@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+	--c-primary: #5ece7b;
+	--c-text: #1d1f22;
+}
+
+.category-btn {
+	padding: 1.3em;
+	text-transform: capitalize;
+	font-weight: 400;
+	transition: 0.3s ease-in;
+	transition-property: color;
+	color: var(--c-text);
+	font-size: 1em;
+}
+
+.category-btn:hover {
+	color: var(--c-primary);
+}
+
+.category-btn.selected {
+	color: var(--c-primary);
+	border-bottom: 1.5px solid var(--c-primary);
+	font-weight: 600;
+}
+
+#header-wrapper {
+	padding-top: 1.6em;
+	padding-bottom: 1.8em;
+}
+
+.logo {
+	margin-right: 8vw;
+}
+
+#header-wrapper > nav {
+	display: flex;
+	justify-content: space-between;
+	font-family: 'Raleway', sans-serif;
+	align-content: center;
+	position: absolute;
+	max-width: 84vw;
+	left: 8vw;
+	right: 8vw;
+}
+
+.currency {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-self: flex-end;
+}
+
+.currency button {
+	border: none;
+	cursor: pointer;
+	position: relative;
+	top: 2px;
+	left: 10px;
+	background-color: #fff;
+}
+
+.cart-btn {
+	margin-left: 22px;
+	position: relative;
+	background-color: #fff;
+}
+
+.currencies-wrapper {
+	position: absolute;
+	top: 60px;
+	cursor: pointer;
+	font-family: 'Raleway', sans-serif;
+	font-weight: 500;
+	min-width: fit-content;
+	background-color: red;
+	box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+	background-color: #fff;
+	z-index: 2;
+}
+
+.currencies-wrapper > * {
+	padding: 13px 40px 10px 20px;
+}
+
+#currency {
+	font-family: 'Raleway', sans-serif;
+	color: var(--c-text);
+	font-weight: 500;
+}
+
+.prod-quantity {
+	position: absolute;
+	color: #fff;
+	background-color: #1d1f22;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	bottom: 15px;
+	left: 10px;
+}
+
+.cart-review {
+	position: absolute;
+	min-width: max-content;
+	top: 30px;
+}
