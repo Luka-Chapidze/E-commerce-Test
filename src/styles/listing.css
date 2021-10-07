@@ -51,7 +51,7 @@
 	padding-top: 24px;
 }
 
-.product-price {
+.product-price > p {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 500;
 	color: #1d1f22;

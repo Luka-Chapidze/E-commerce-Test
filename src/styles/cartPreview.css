@@ -19,12 +19,6 @@
 	min-width: 300px;
 	width: 25vw;
 }
-@media all and (max-width: 600px) {
-	.review-cart-wrapper {
-		left: 50%;
-		transform: translate(-50%);
-	}
-}
 
 .cart-prev-change-quantity {
 	border: 1px solid #1d1f22;
@@ -205,4 +199,11 @@
 .cart-prev-img-wrapper {
 	margin-right: 1em;
 	display: flex;
+}
+
+@media all and (max-width: 768px) {
+	.review-cart-wrapper {
+		left: 50%;
+		transform: translate(-50%);
+	}
 }

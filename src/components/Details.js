@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { graphql } from '@apollo/client/react/hoc'
 import { gql } from '@apollo/client'
-import { Link } from 'react-router-dom'
 import '../styles/details.css'
 import { connect } from 'react-redux'
 import { CURRENCY_SYMBOLS as symbols } from '../components/Currency'
@@ -73,7 +72,7 @@ class Details extends Component {
 				return prod.id === product.id
 			})
 
-			if (itemInCart == undefined) {
+			if (itemInCart === undefined) {
 				if (
 					Object.keys(product.attributes).length !==
 					product.allAttributes.length
@@ -100,20 +99,23 @@ class Details extends Component {
 	}
 
 	getImages = (arr) => {
-		return arr.map((src) => {
+		return arr.map((src, ind) => {
 			return (
 				<img
 					className='details-imgs'
 					src={src}
-					alt=''
+					alt='product'
 					onClick={this.getImgSrc}
+					key={'details-img' + ind}
 				/>
 			)
 		})
 	}
 
 	addAttributesToCart = (e) => {
-		this.state.attributes[e.target.name] = e.target.value
+		this.setState({
+			attributes: { ...this.state.attributes, [e.target.name]: e.target.value },
+		})
 		document.documentElement.style.setProperty('--display-for-before', 'none')
 	}
 
@@ -125,13 +127,13 @@ class Details extends Component {
 
 	getAttributes(product) {
 		let attributes = product.attributes
-		return attributes.map((item) => (
-			<form className='form' action='' key={item.id}>
+		return attributes.map((item, index) => (
+			<form className='form' action='' key={item.id + index}>
 				<p>{item.name}:</p>
 				<div className='radios-wrapper'>
 					{item.name.toLowerCase() !== 'color'
-						? item.items.map((opt) => (
-								<div>
+						? item.items.map((opt, index) => (
+								<div key={'radio-wrapper' + index}>
 									<input
 										type='radio'
 										name={item.name}
@@ -145,8 +147,8 @@ class Details extends Component {
 									</label>
 								</div>
 						  ))
-						: item.items.map((opt) => (
-								<div key={item.id}>
+						: item.items.map((opt, index) => (
+								<div key={'color-radio-wrapper' + index}>
 									<input
 										type='radio'
 										name={item.name}
@@ -212,7 +214,7 @@ class Details extends Component {
 										? item.gallery[0]
 										: this.state.imageUrl
 								}
-								alt=''
+								alt='product'
 							/>
 						</div>
 					</div>

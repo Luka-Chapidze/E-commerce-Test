@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { graphql } from '@apollo/client/react/hoc'
-import { gql, throwServerError } from '@apollo/client'
+import { gql } from '@apollo/client'
 import { connect } from 'react-redux'
 import { CURRENCY_SYMBOLS as symbols } from '../components/Currency'
 import '../styles/cart.css'
@@ -50,15 +50,15 @@ class Cart extends Component {
 		if (item.quantity !== 0) {
 			return (
 				<div>
-					{allAttributes.map((attr) => {
+					{allAttributes.map((attr, ind) => {
 						return (
-							<div className='attr-container' key={item.id}>
+							<div className='attr-container' key={'attr-container' + ind}>
 								<p className='cart-attribute-name'>{attr.name}</p>
 								<div className='cart-attr-wrapper'>
 									{attr.name.toLowerCase() !== 'color'
-										? attr.items.map((opt) => {
+										? attr.items.map((opt, index) => {
 												return (
-													<div id={item.id} key={item.id}>
+													<div id={item.id} key={'cart-radio-wrapper' + index}>
 														<input
 															type='radio'
 															name={item.id + attr.name}
@@ -81,9 +81,9 @@ class Cart extends Component {
 													</div>
 												)
 										  })
-										: attr.items.map((opt) => {
+										: attr.items.map((opt, index) => {
 												return (
-													<div id={item.id} key={item.id}>
+													<div id={item.id} key={'cart-color-wrapper' + index}>
 														<input
 															type='radio'
 															name={item.name + attr.name}
@@ -184,18 +184,18 @@ class Cart extends Component {
 
 	getImages(item) {
 		return (
-			<div style={{ position: 'relative' }} key={item.id}>
+			<div style={{ position: 'relative' }}>
 				<img
 					onClick={this.changeImg}
 					className='change-img-btn left'
 					id={item.id}
 					src={ArrowLeft}
-					alt=''
+					alt='left arrow'
 				/>
 				<div>
 					<img
 						src={item.gallery[this.state.imgIndexes[item.id]]}
-						alt='product picture'
+						alt='product'
 						className='cart-prod-imgs'
 						width='140px'
 						height='180px'
@@ -206,7 +206,7 @@ class Cart extends Component {
 					className='change-img-btn right'
 					id={item.id}
 					src={ArrowRight}
-					alt=''
+					alt='arrow right'
 				/>
 			</div>
 		)
@@ -232,9 +232,9 @@ class Cart extends Component {
 			<div className='cart-wrapper'>
 				<p>Cart</p>
 				<div>
-					{this.props.productsInCart.map((item) => {
+					{this.props.productsInCart.map((item, index) => {
 						return (
-							<div className='cart-prod-wrapper'>
+							<div className='cart-prod-wrapper' key={'cart-wrapp' + index}>
 								<div>
 									<h2 className='cart-item-brand'>{item.brand}</h2>
 									<Link to={`/products/${item.defaultId}`}>

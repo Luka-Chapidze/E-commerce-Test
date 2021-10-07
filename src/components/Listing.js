@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { gql } from '@apollo/client'
 import { graphql } from '@apollo/client/react/hoc'
 import { connect } from 'react-redux'
-import { changeCategory, addToCart, changeQuantity } from '../redux/actions'
+import { addToCart, changeQuantity } from '../redux/actions'
 import '../styles/listing.css'
 import addToCartImg from '../images/Add-To-Cart.svg'
 import { CURRENCY_SYMBOLS as symbols } from '../components/Currency'
-import CartPreview from '../components/CartPreview'
 import { Link } from 'react-router-dom'
 
 const PRODUCTS = gql`
@@ -40,8 +39,7 @@ const PRODUCTS = gql`
 class Listing extends Component {
 	addAttributesToCart(attributes) {
 		let item = {}
-		attributes.map((attr) => {
-			console.log(attr.name)
+		attributes.forEach((attr) => {
 			if (attr.name !== 'Color') {
 				item[attr.id] = attr.items[0].id
 			} else if (attr.name === 'Color') {
@@ -86,7 +84,7 @@ class Listing extends Component {
 				return prod.id === product.id
 			})
 
-			if (itemInCart == undefined) {
+			if (itemInCart === undefined) {
 				this.props.addToCart(product)
 			} else {
 				this.props.changeQuantity(product)
@@ -107,7 +105,7 @@ class Listing extends Component {
 							src={prod.gallery[0]}
 							width='354px'
 							height='330px'
-							alt='product image'
+							alt='product'
 							className='product-img'
 						/>
 					</Link>
@@ -116,16 +114,16 @@ class Listing extends Component {
 						src={prod.gallery[0]}
 						width='354px'
 						height='330px'
-						alt='product image'
+						alt='product'
 						className='product-img out-of-stock'
 					/>
 				)}
 				<p className='product-name'>
 					{prod.brand} {prod.name}
 				</p>
-				<p className='product-price'>{this.getPrice(prod)}</p>
+				<span className='product-price'>{this.getPrice(prod)}</span>
 				<button onClick={this.addToCart} className='add-btn'>
-					<img id={prod.id} src={addToCartImg} alt='' />
+					<img id={prod.id} src={addToCartImg} alt='cart icon' />
 				</button>
 			</div>
 		)
@@ -176,7 +174,7 @@ class Listing extends Component {
 			<div className='listing-page'>
 				<h1 className='category-name'>{category}</h1>
 				<div className='listings-wrapper'>
-					{category == undefined
+					{category === undefined
 						? this.getAllProducts()
 						: this.getProducts(category)}
 				</div>

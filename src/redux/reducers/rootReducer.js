@@ -27,6 +27,7 @@ const currencyReducer = (state = initialState, action) => {
 				...state,
 				currencyIsOpen: !state.currencyIsOpen,
 			}
+
 		default:
 			return state
 	}
@@ -130,7 +131,7 @@ const addToCartReducer = (state = initialState, action) => {
 					}
 				}
 			}
-
+			break
 		case CHANGE_ATTRIBUTE:
 			let id = action.payload.target.parentElement.id
 			let itemToChange = state.productsInCart.find((item) => item.id === id)
@@ -156,6 +157,7 @@ const addToCartReducer = (state = initialState, action) => {
 					],
 				}
 			}
+			break
 		default:
 			return state
 	}

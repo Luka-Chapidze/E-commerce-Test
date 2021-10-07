@@ -33,9 +33,10 @@ class Header extends Component {
 		if (data.loading) {
 			return ''
 		} else {
-			return data.categories.map((item) => {
+			return data.categories.map((item, index) => {
 				return (
 					<NavLink
+						key={'category-navlink' + index}
 						to={`/${item.name}`}
 						id={item.name}
 						className='category-btn'
@@ -91,7 +92,7 @@ class Header extends Component {
 						{this.props.currencyIsOpen ? <Currency /> : ''}
 						<div>
 							<button onClick={this.props.openCart} className='cart-btn'>
-								<img src={Cart} alt='' />
+								<img src={Cart} alt='cart icon' />
 								<div className='prod-quantity'>
 									<p>{this.getFullQuantity()}</p>
 								</div>

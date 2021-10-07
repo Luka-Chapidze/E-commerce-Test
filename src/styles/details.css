@@ -34,6 +34,7 @@
 	padding-top: 4vw;
 	margin-left: 7vw;
 	margin-right: 15vw;
+	max-width: 93vw;
 }
 
 .details-texts h2 {
@@ -50,20 +51,6 @@
 	word-wrap: break-word;
 }
 
-@media all and (max-width: 600px) {
-	.details-texts > h2,
-	.details-texts > h3 {
-		font-size: 1.2em;
-	}
-	#header-wrapper > nav {
-		left: 0;
-		right: 0;
-		max-width: 95vw;
-	}
-	body {
-		overflow-x: hidden;
-	}
-}
 .details-texts {
 	font-family: 'Raleway', sans-serif;
 	color: #1d1f22;
@@ -238,7 +225,7 @@
 	display: flex;
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 768px) {
 	.description {
 		max-width: 80vw;
 		margin-top: 50px;
@@ -279,5 +266,18 @@
 	}
 	.info-wrapper {
 		justify-content: center;
+	}
+	.details-texts > h2,
+	.details-texts > h3 {
+		font-size: 1.2em;
+	}
+	#header-wrapper > nav {
+		left: 0;
+		right: 0;
+		max-width: 95vw;
+		justify-content: space-around;
+	}
+	body {
+		overflow-x: hidden;
 	}
 }

@@ -4,13 +4,7 @@ import { gql } from '@apollo/client'
 import { graphql } from '@apollo/client/react/hoc'
 import '../styles/cartPreview.css'
 import { Link } from 'react-router-dom'
-import Cart from './Cart'
-import {
-	openCart,
-	changeAttribute,
-	increaseQuantity,
-	decreaseQuantity,
-} from '../redux/actions'
+import { openCart, increaseQuantity, decreaseQuantity } from '../redux/actions'
 import { CURRENCY_SYMBOLS as symbols } from './Currency'
 
 const prodQuery = gql`
@@ -45,10 +39,13 @@ class CartPreview extends Component {
 
 	getItems = () => {
 		let products = this.props.productsInCart
-		return products.map((item) => {
+		return products.map((item, index) => {
 			return (
-				<div className='cart-prev-item-container'>
-					<div className='cart-preview-item' key={item.id}>
+				<div
+					className='cart-prev-item-container'
+					key={'cart-prev-item-container' + index}
+				>
+					<div className='cart-preview-item' key={'cart-preview-item' + index}>
 						<h2>{item.brand}</h2>
 						<h3>{item.itemName}</h3>
 						<p>{this.getPrice(item)}</p>
@@ -78,7 +75,7 @@ class CartPreview extends Component {
 							onClick={this.props.openCart}
 							to={`/products/${item.defaultId}`}
 						>
-							<img src={item.gallery[0]} width='105px' alt='' />
+							<img src={item.gallery[0]} width='105px' alt='product' />
 						</Link>
 					</div>
 				</div>
@@ -106,15 +103,18 @@ class CartPreview extends Component {
 		if (item.quantity !== 0) {
 			return (
 				<div>
-					{allAttributes.map((attr) => {
+					{allAttributes.map((attr, index) => {
 						return (
-							<div className='cart-prev-attr-container' key={item.id}>
+							<div
+								className='cart-prev-attr-container'
+								key={'cart-prev-attr' + index}
+							>
 								<p className='cart-prev-attribute-name'>{attr.name}</p>
 								<div className='cart-prev-attr-wrapper'>
 									{attr.name.toLowerCase() !== 'color'
-										? attr.items.map((opt) => {
+										? attr.items.map((opt, index) => {
 												return (
-													<div id={item.id} key={item.id}>
+													<div id={item.id} key={'cart-prev-radio' + index}>
 														<input
 															type='radio'
 															name={item.id + attr.name + 'prev'}
@@ -137,9 +137,12 @@ class CartPreview extends Component {
 													</div>
 												)
 										  })
-										: attr.items.map((opt) => {
+										: attr.items.map((opt, index) => {
 												return (
-													<div id={item.id} key={item.id}>
+													<div
+														id={item.id}
+														key={'cart-prev-color-radio' + index}
+													>
 														<input
 															type='radio'
 															name={item.name + attr.name + 'prev'}
@@ -151,6 +154,7 @@ class CartPreview extends Component {
 																attr.name,
 																opt.value
 															)}
+															disabled
 														></input>
 														<label
 															style={{ backgroundColor: opt.value }}
@@ -205,10 +209,10 @@ class CartPreview extends Component {
 				className='review-cart-container'
 			>
 				<div className='review-cart-wrapper'>
-					<p className='bolder-cart-prev-text'>
+					<span className='bolder-cart-prev-text'>
 						<p>My Bag, </p>
 						{`${this.getFullQuantity()} Items`}
-					</p>
+					</span>
 					{this.getItems()}
 					<div className='cart-prev-total'>
 						<p className=''>Total</p>

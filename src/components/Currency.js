@@ -29,10 +29,10 @@ class Currency extends Component {
 		if (data.loading) {
 			return
 		} else {
-			return data.currencies.map((currency) => {
+			return data.currencies.map((currency, index) => {
 				return (
 					<li
-						key={currency}
+						key={'currency' + index}
 						id={currency}
 						onClick={this.handleCurrencyChange}
 						className='currency-li'
