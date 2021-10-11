@@ -5,6 +5,7 @@ import '../styles/details.css'
 import { connect } from 'react-redux'
 import { CURRENCY_SYMBOLS as symbols } from '../components/Currency'
 import { addToCart, changeQuantity } from '../redux/actions'
+import ReactHtmlParser from 'react-html-parser'
 
 const prodInfo = gql`
 	{
@@ -16,6 +17,7 @@ const prodInfo = gql`
 					amount
 					currency
 				}
+				inStock
 				description
 				name
 				gallery
@@ -101,13 +103,17 @@ class Details extends Component {
 	getImages = (arr) => {
 		return arr.map((src, ind) => {
 			return (
-				<img
-					className='details-imgs'
-					src={src}
-					alt='product'
-					onClick={this.getImgSrc}
-					key={'details-img' + ind}
-				/>
+				<div
+					className='details-imgs-wrapper'
+					key={'details-imgs-wrapper' + ind}
+				>
+					<img
+						src={src}
+						alt='product'
+						onClick={this.getImgSrc}
+						key={'details-img' + ind}
+					/>
+				</div>
 			)
 		})
 	}
@@ -226,18 +232,23 @@ class Details extends Component {
 						<div className='attributes-wrapper'>{this.getAttributes(item)}</div>
 						<div>{this.getPrice(item)}</div>
 						<div>
-							<button
-								id={item.id}
-								className='pdp-add-btn'
-								onClick={this.addToCart}
-							>
-								Add To Cart
-							</button>
+							{item.inStock ? (
+								<button
+									id={item.id}
+									className='pdp-add-btn'
+									onClick={this.addToCart}
+								>
+									Add To Cart
+								</button>
+							) : (
+								<button id={item.id} className='out-of-stock-btn'>
+									Out Of Stock
+								</button>
+							)}
 						</div>
-						<div
-							className='description'
-							dangerouslySetInnerHTML={{ __html: item.description }}
-						></div>
+						<div className='description'>
+							{ReactHtmlParser(item.description)}
+						</div>
 					</div>
 				</div>
 			)

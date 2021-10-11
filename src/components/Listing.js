@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { gql } from '@apollo/client'
 import { graphql } from '@apollo/client/react/hoc'
 import { connect } from 'react-redux'
-import { addToCart, changeQuantity } from '../redux/actions'
+import { addToCart, changeQuantity, openCurrency } from '../redux/actions'
 import '../styles/listing.css'
 import addToCartImg from '../images/Add-To-Cart.svg'
 import { CURRENCY_SYMBOLS as symbols } from '../components/Currency'
@@ -101,22 +101,24 @@ class Listing extends Component {
 			>
 				{prod.inStock ? (
 					<Link to={`/products/${prod.id}`}>
-						<img
-							src={prod.gallery[0]}
-							width='354px'
-							height='330px'
-							alt='product'
-							className='product-img'
-						/>
+						<div className='listing-product-img-wrapper'>
+							<img
+								src={prod.gallery[0]}
+								alt='product'
+								className='product-img'
+							/>
+						</div>
 					</Link>
 				) : (
-					<img
-						src={prod.gallery[0]}
-						width='354px'
-						height='330px'
-						alt='product'
-						className='product-img out-of-stock'
-					/>
+					<Link to={`/products/${prod.id}`}>
+						<div className='listing-product-img-wrapper'>
+							<img
+								src={prod.gallery[0]}
+								alt='product'
+								className='product-img out-of-stock'
+							/>
+						</div>
+					</Link>
 				)}
 				<p className='product-name'>
 					{prod.brand} {prod.name}
@@ -171,7 +173,12 @@ class Listing extends Component {
 	render() {
 		let category = this.props.match.params.category
 		return (
-			<div className='listing-page'>
+			<div
+				className='listing-page'
+				onClick={
+					this.props.currencyIsOpen ? this.props.closeCurrency : () => {}
+				}
+			>
 				<h1 className='category-name'>{category}</h1>
 				<div className='listings-wrapper'>
 					{category === undefined
@@ -188,6 +195,7 @@ const mapStateToProps = (state) => {
 		category: state.changeCategory.category,
 		currency: state.changeCurrency.currency,
 		productsInCart: state.addToCart.productsInCart,
+		currencyIsOpen: state.currencyOpen.currencyIsOpen,
 	}
 }
 
@@ -195,6 +203,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		addToCart: (product) => dispatch(addToCart(product)),
 		changeQuantity: (product) => dispatch(changeQuantity(product)),
+		closeCurrency: () => dispatch(openCurrency()),
 	}
 }
 

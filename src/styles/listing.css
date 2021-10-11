@@ -99,3 +99,16 @@
 .no-stock-wrapper > * {
 	cursor: auto;
 }
+
+.listing-product-img-wrapper {
+	height: 338px;
+	width: 356px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.listing-product-img-wrapper img {
+	width: 356px;
+}

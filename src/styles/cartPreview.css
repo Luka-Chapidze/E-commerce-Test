@@ -18,6 +18,7 @@
 	overflow-y: scroll;
 	min-width: 300px;
 	width: 25vw;
+	overflow-x: hidden;
 }
 
 .cart-prev-change-quantity {
@@ -194,6 +195,13 @@
 	justify-content: space-around;
 	flex-direction: row;
 	margin-bottom: 20px;
+}
+
+.cart-prev-prod-quan-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 2vw;
 }
 
 .cart-prev-img-wrapper {

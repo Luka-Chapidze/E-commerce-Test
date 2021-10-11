@@ -6,6 +6,7 @@ import { createStore } from 'redux'
 const persistConfig = {
 	key: 'root',
 	storage,
+	whitelist: ['addToCart'],
 }
 
 const persistReducerr = persistReducer(persistConfig, rootReducer)

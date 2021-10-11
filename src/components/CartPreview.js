@@ -25,9 +25,7 @@ class CartPreview extends Component {
 	}
 
 	closeCart = (e) => {
-		return e.target.className === 'review-cart-container'
-			? this.props.openCart()
-			: ''
+		if (e.target.className === 'review-cart-container') this.props.openCart()
 	}
 
 	getPrice(item) {
@@ -52,7 +50,7 @@ class CartPreview extends Component {
 						<div>{this.getAttributes(item)}</div>
 					</div>
 					<div className='cart-prev-img-wrapper'>
-						<div className='prod-quan-wrapper'>
+						<div className='cart-prev-prod-quan-wrapper'>
 							<div className='quantity-wrapper'>
 								<div
 									id={item.id}
@@ -75,7 +73,9 @@ class CartPreview extends Component {
 							onClick={this.props.openCart}
 							to={`/products/${item.defaultId}`}
 						>
-							<img src={item.gallery[0]} width='105px' alt='product' />
+							<div className='cart-prev-imgs-wrapper'>
+								<img src={item.gallery[0]} width='105px' alt='product' />
+							</div>
 						</Link>
 					</div>
 				</div>

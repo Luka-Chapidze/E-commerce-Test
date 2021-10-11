@@ -61,6 +61,8 @@ class Header extends Component {
 	handleCartOpen = () => {
 		if (this.props.cartIsOpen) {
 			this.props.openCart()
+		} else if (this.props.currencyIsOpen) {
+			this.props.openCurrency()
 		}
 	}
 
@@ -71,9 +73,22 @@ class Header extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.handleCartOpen()
+		this.handeCurrencyOpen()
+	}
+
+	handleCartClick = () => {
+		if (this.props.currencyIsOpen) {
+			this.props.openCurrency()
+		}
+
+		this.props.openCart()
+	}
+
 	render() {
 		return (
-			<div id='header-wrapper'>
+			<div id='header-wrapper' onClick={this.closeCurrency}>
 				<nav>
 					<div className='category-wrapper'>{this.getCategories()}</div>
 					<div className='logo'>
@@ -87,11 +102,12 @@ class Header extends Component {
 							<img
 								src={this.props.currencyIsOpen ? Arrow_Up : Arrow_Down}
 								alt='arrow to open currency options'
+								className='openCurrencyArrow'
 							/>
 						</button>
 						{this.props.currencyIsOpen ? <Currency /> : ''}
 						<div>
-							<button onClick={this.props.openCart} className='cart-btn'>
+							<button onClick={this.handleCartClick} className='cart-btn'>
 								<img src={Cart} alt='cart icon' />
 								<div className='prod-quantity'>
 									<p>{this.getFullQuantity()}</p>

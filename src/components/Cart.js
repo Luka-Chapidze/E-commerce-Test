@@ -11,6 +11,7 @@ import {
 	changeQuantity,
 	decreaseQuantity,
 	increaseQuantity,
+	openCurrency,
 } from '../redux/actions'
 import { Link } from 'react-router-dom'
 
@@ -184,30 +185,36 @@ class Cart extends Component {
 
 	getImages(item) {
 		return (
-			<div style={{ position: 'relative' }}>
-				<img
-					onClick={this.changeImg}
-					className='change-img-btn left'
-					id={item.id}
-					src={ArrowLeft}
-					alt='left arrow'
-				/>
-				<div>
+			<div className='cart-left-arrow-wrapper'>
+				{item.gallery.length > 1 ? (
+					<img
+						onClick={this.changeImg}
+						className='change-img-btn left'
+						id={item.id}
+						src={ArrowLeft}
+						alt='left arrow'
+					/>
+				) : (
+					''
+				)}
+				<div className='cart-img-wrapper'>
 					<img
 						src={item.gallery[this.state.imgIndexes[item.id]]}
 						alt='product'
 						className='cart-prod-imgs'
-						width='140px'
-						height='180px'
 					/>
 				</div>
-				<img
-					onClick={this.changeImg}
-					className='change-img-btn right'
-					id={item.id}
-					src={ArrowRight}
-					alt='arrow right'
-				/>
+				{item.gallery.length > 1 ? (
+					<img
+						onClick={this.changeImg}
+						className='change-img-btn right'
+						id={item.id}
+						src={ArrowRight}
+						alt='arrow right'
+					/>
+				) : (
+					''
+				)}
 			</div>
 		)
 	}
@@ -231,7 +238,7 @@ class Cart extends Component {
 		return (
 			<div className='cart-wrapper'>
 				<p>Cart</p>
-				<div>
+				<div className='cart-products'>
 					{this.props.productsInCart.map((item, index) => {
 						return (
 							<div className='cart-prod-wrapper' key={'cart-wrapp' + index}>
@@ -278,6 +285,7 @@ const mapStateToProps = (state) => {
 	return {
 		productsInCart: state.addToCart.productsInCart,
 		currency: state.changeCurrency.currency,
+		currencyIsopen: state.currencyOpen.currencyIsOpen,
 	}
 }
 
@@ -287,6 +295,7 @@ const mapDispatchToProps = (dispatch) => {
 		increaseQuantity: (item) => dispatch(increaseQuantity(item)),
 		decreaseQuantity: (item) => dispatch(decreaseQuantity(item)),
 		changeAttribute: (item) => dispatch(changeAttribute(item)),
+		closeCurrency: () => dispatch(openCurrency()),
 	}
 }
 
