@@ -9,8 +9,8 @@ import { CURRENCY_SYMBOLS as symbols } from '../components/Currency'
 import { Link } from 'react-router-dom'
 
 const PRODUCTS = gql`
-	{
-		categories {
+	query getCat($cat: CategoryInput!) {
+		category(input: $cat) {
 			name
 			products {
 				id
@@ -54,13 +54,9 @@ class Listing extends Component {
 		if (data.loading) {
 			return ''
 		} else {
-			let [[item]] = data.categories
-				.map((category) => {
-					return category.products.filter((prod) => {
-						return prod.id === e.target.id
-					})
-				})
-				.filter((item) => item.length !== 0)
+			let item = data.category.products.find((prod) => {
+				return prod.id === e.target.id
+			})
 
 			let attrObj = this.addAttributesToCart(item.attributes)
 
@@ -131,28 +127,12 @@ class Listing extends Component {
 		)
 	}
 
-	getAllProducts() {
-		let data = this.props.data
+	getProducts() {
+		let { data } = this.props
 		if (data.loading) {
 			return ''
 		} else {
-			return data.categories.map((category) => {
-				return category.products.map((prod) => {
-					return this.returnItems(prod)
-				})
-			})
-		}
-	}
-
-	getProducts(category) {
-		let data = this.props.data
-		if (data.loading) {
-			return ''
-		} else {
-			let filteredProd = data.categories.filter(
-				(item) => item.name === category
-			)
-			return filteredProd[0].products.map((prod) => {
+			return data.category.products.map((prod) => {
 				return this.returnItems(prod)
 			})
 		}
@@ -180,11 +160,7 @@ class Listing extends Component {
 				}
 			>
 				<h1 className='category-name'>{category}</h1>
-				<div className='listings-wrapper'>
-					{category === undefined
-						? this.getAllProducts()
-						: this.getProducts(category)}
-				</div>
+				<div className='listings-wrapper'>{this.getProducts(category)}</div>
 			</div>
 		)
 	}
@@ -206,7 +182,8 @@ const mapDispatchToProps = (dispatch) => {
 		closeCurrency: () => dispatch(openCurrency()),
 	}
 }
-
-export default graphql(PRODUCTS)(
-	connect(mapStateToProps, mapDispatchToProps)(Listing)
-)
+export default graphql(PRODUCTS, {
+	options: (props) => ({
+		variables: { cat: { title: props.match.params.category || '' } },
+	}),
+})(connect(mapStateToProps, mapDispatchToProps)(Listing))

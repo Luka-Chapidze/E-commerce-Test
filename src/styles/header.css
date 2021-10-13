@@ -52,7 +52,7 @@
 	justify-self: flex-end;
 }
 
-.currency > p {
+.currency > button > p {
 	font-size: 18px;
 	font-weight: 500;
 	color: #1d1f22;
@@ -120,4 +120,17 @@
 	position: absolute;
 	min-width: max-content;
 	top: 30px;
+}
+
+.currency > button {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.openCurrencyArrow {
+	position: relative;
+	left: 5px;
+	top: 2px;
 }

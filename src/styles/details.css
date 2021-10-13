@@ -216,19 +216,6 @@
 	margin-top: 3vw;
 	margin-bottom: 30px;
 	max-height: 300px;
-	overflow-y: auto;
-}
-
-.description::-webkit-scrollbar {
-	width: 2px;
-	margin-left: 4px;
-}
-
-.description::-webkit-scrollbar-track {
-	background-color: #1d1f225e;
-}
-.description::-webkit-scrollbar-thumb {
-	background-color: #1d1f22d2;
 }
 
 .description h1 {

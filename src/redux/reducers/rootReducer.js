@@ -132,6 +132,7 @@ const addToCartReducer = (state = initialState, action) => {
 				}
 			}
 			break
+
 		case CHANGE_ATTRIBUTE:
 			let id = action.payload.target.parentElement.id
 			let itemToChange = state.productsInCart.find((item) => item.id === id)
@@ -148,7 +149,8 @@ const addToCartReducer = (state = initialState, action) => {
 							...itemToChange,
 							attributes: {
 								...attributes,
-								[Object.keys(attributes)[0]]: action.payload.target.value,
+								[action.payload.target.dataset.name]:
+									action.payload.target.value,
 							},
 						},
 						...state.productsInCart.slice(
@@ -158,6 +160,7 @@ const addToCartReducer = (state = initialState, action) => {
 				}
 			}
 			break
+
 		default:
 			return state
 	}

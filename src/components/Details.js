@@ -8,29 +8,29 @@ import { addToCart, changeQuantity } from '../redux/actions'
 import ReactHtmlParser from 'react-html-parser'
 
 const prodInfo = gql`
-	{
-		categories {
-			products {
+	query getItem($id: String!) {
+		product(id: $id) {
+			name
+			id
+			inStock
+			gallery
+			description
+			category
+			attributes {
 				id
-				brand
-				prices {
-					amount
-					currency
-				}
-				inStock
-				description
 				name
-				gallery
-				attributes {
-					name
+				type
+				items {
+					displayValue
+					value
 					id
-					items {
-						value
-						displayValue
-						id
-					}
 				}
 			}
+			prices {
+				amount
+				currency
+			}
+			brand
 		}
 	}
 `
@@ -49,14 +49,7 @@ class Details extends Component {
 		if (data.loading) {
 			return ''
 		} else {
-			let [[item]] = data.categories
-				.map((category) => {
-					return category.products.filter((prod) => {
-						return prod.id === e.target.id
-					})
-				})
-				.filter((item) => item.length !== 0)
-
+			let item = this.props.data.product
 			let product = {
 				defaultId: item.id,
 				id: `${Object.values(this.state.attributes).join('-')}-${item.id}`,
@@ -100,6 +93,12 @@ class Details extends Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.setState({
+			attributes: {},
+		})
+	}
+
 	getImages = (arr) => {
 		return arr.map((src, ind) => {
 			return (
@@ -134,12 +133,12 @@ class Details extends Component {
 	getAttributes(product) {
 		let attributes = product.attributes
 		return attributes.map((item, index) => (
-			<form className='form' action='' key={item.id + index}>
+			<form className='form' key={product.id + index}>
 				<p>{item.name}:</p>
 				<div className='radios-wrapper'>
 					{item.name.toLowerCase() !== 'color'
 						? item.items.map((opt, index) => (
-								<div key={'radio-wrapper' + index}>
+								<div key={'radio-wrapper' + index + item.id}>
 									<input
 										type='radio'
 										name={item.name}
@@ -154,7 +153,7 @@ class Details extends Component {
 								</div>
 						  ))
 						: item.items.map((opt, index) => (
-								<div key={'color-radio-wrapper' + index}>
+								<div key={'color-radio-wrapper' + index + item.id}>
 									<input
 										type='radio'
 										name={item.name}
@@ -196,18 +195,11 @@ class Details extends Component {
 	}
 
 	getData = () => {
-		const data = this.props.data
+		let data = this.props.data
 		if (data.loading) {
 			return ''
 		} else {
-			let [[item]] = data.categories
-				.map((category) => {
-					return category.products.filter((item) => {
-						return item.id === this.props.match.params.id
-					})
-				})
-				.filter((item) => item.length !== 0)
-
+			let item = data.product
 			return (
 				<div className='images-wrapper'>
 					<div className='images-cont'>
@@ -273,6 +265,6 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default graphql(prodInfo)(
-	connect(mapStateToProps, mapDispatchToProps)(Details)
-)
+export default graphql(prodInfo, {
+	options: (props) => ({ variables: { id: props.match.params.id } }),
+})(connect(mapStateToProps, mapDispatchToProps)(Details))

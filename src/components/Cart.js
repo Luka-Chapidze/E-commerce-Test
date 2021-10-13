@@ -42,7 +42,7 @@ class Cart extends Component {
 		}
 	}
 
-	changeAttribute = (e) => {
+	changeAttributes = (e) => {
 		this.props.changeAttribute(e)
 	}
 
@@ -65,13 +65,14 @@ class Cart extends Component {
 															name={item.id + attr.name}
 															id={item.id + opt.value + attr.name}
 															value={opt.value}
-															onClick={this.changeAttribute}
+															onClick={this.changeAttributes}
 															className='cart-radio-btns'
 															defaultChecked={this.checkIfChecked(
 																item,
 																attr.name,
 																opt.value
 															)}
+															data-name={attr.name}
 														></input>
 														<label
 															className='cart-labels'
@@ -87,16 +88,17 @@ class Cart extends Component {
 													<div id={item.id} key={'cart-color-wrapper' + index}>
 														<input
 															type='radio'
-															name={item.name + attr.name}
+															name={item.id + attr.name}
 															id={item.id + opt.value + attr.name}
 															value={opt.value}
 															className='cart-color-radio-btns'
-															onClick={this.changeAttribute}
+															onClick={this.changeAttributes}
 															defaultChecked={this.checkIfChecked(
 																item,
 																attr.name,
 																opt.value
 															)}
+															data-name={attr.name}
 														></input>
 														<label
 															style={{ backgroundColor: opt.value }}

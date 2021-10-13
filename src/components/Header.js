@@ -86,10 +86,15 @@ class Header extends Component {
 		this.props.openCart()
 	}
 
+	closeCurrency = (e) => {
+		if (e.target.className === 'nav' && this.props.currencyIsOpen) {
+			this.props.openCurrency()
+		}
+	}
 	render() {
 		return (
 			<div id='header-wrapper' onClick={this.closeCurrency}>
-				<nav>
+				<nav className='nav'>
 					<div className='category-wrapper'>{this.getCategories()}</div>
 					<div className='logo'>
 						<Link to='/' onClick={this.handleCartOpen}>
@@ -97,8 +102,8 @@ class Header extends Component {
 						</Link>
 					</div>
 					<div className='currency'>
-						<p>{CURRENCY_SYMBOLS[this.props.currency]}</p>
 						<button onClick={this.handeCurrencyOpen}>
+							<p>{CURRENCY_SYMBOLS[this.props.currency]}</p>
 							<img
 								src={this.props.currencyIsOpen ? Arrow_Up : Arrow_Down}
 								alt='arrow to open currency options'

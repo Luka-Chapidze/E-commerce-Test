@@ -8,17 +8,15 @@ import Cart from './components/Cart'
 export class App extends Component {
 	render() {
 		return (
-			<div>
-				<BrowserRouter>
-					<Header />
-					<Switch>
-						<Route exact path='/' component={Listing} />
-						<Route exact path='/cart' component={Cart} />
-						<Route exact path='/:category' component={Listing} />
-						<Route path='/products/:id' component={Details} />
-					</Switch>
-				</BrowserRouter>
-			</div>
+			<BrowserRouter>
+				<Header />
+				<Switch>
+					<Route exact path='/' component={Listing} />
+					<Route exact path='/cart' component={Cart} />
+					<Route exact path='/:category' component={Listing} />
+					<Route path='/products/:id' component={Details} />
+				</Switch>
+			</BrowserRouter>
 		)
 	}
 }
